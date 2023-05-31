@@ -7,7 +7,6 @@ public class CameraControl : MonoBehaviour
     public float sensitivity = .5f;
     public float teleportOffset = 1f;
 
-
     private Vector2 mouseInput;
 
     [SerializeField] Transform rayOrigin;
@@ -19,24 +18,32 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        // Camera Movement
+        CameraMovement();
+        CameraRotation();
+        Teleportation();
+    }
+    
+    private void CameraMovement()
+    {
         float horizontalMovement = Input.GetAxis("Horizontal");
         float verticalMovement = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalMovement, 0, verticalMovement) * movementSpeed * Time.deltaTime;
         transform.Translate(movement);
-
-
-        // Camera Rotation
+    }
+    
+    private void CameraRotation()
+    {
         if (Input.GetMouseButton(1))
         {
             mouseInput.x += Input.GetAxis("Mouse X") * sensitivity;
             mouseInput.y += Input.GetAxis("Mouse Y") * sensitivity;
             transform.localRotation = Quaternion.Euler(-mouseInput.y, mouseInput.x, 0f);
         }
-
-        
-        // Teleportation
+    }
+    
+    private void Teleportation()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = new Ray(rayOrigin.transform.position, rayOrigin.transform.forward);
