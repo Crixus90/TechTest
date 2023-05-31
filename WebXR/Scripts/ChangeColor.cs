@@ -5,11 +5,11 @@ using UnityEngine;
 public class ChangeColor : MonoBehaviour
 {
 
-    Renderer _mat;
+    private Renderer renderer;
 
     void Start()
     {
-        _mat = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
     }
 
 
@@ -20,7 +20,7 @@ public class ChangeColor : MonoBehaviour
     
     private void ChangeColor()
     {
-        _mat.material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        renderer.material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
 }
